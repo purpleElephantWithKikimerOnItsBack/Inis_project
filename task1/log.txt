@@ -1,0 +1,11 @@
+commit 3f5868af581c7d72ee10257d876875fd269a546e (HEAD -> master)
+Author: kikimer <mr.kikimer95@mail.ru>
+Date:   Tue Feb 12 21:31:06 2019 +0300
+
+    add status.txt
+
+commit bae53498ec8073d522728be7ecbc4738acb8b273
+Author: kikimer <mr.kikimer95@mail.ru>
+Date:   Tue Feb 12 21:26:03 2019 +0300
+
+    add .gitignore
