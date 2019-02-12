@@ -9,7 +9,7 @@ Untracked files:
         Inis.iml
 
 nothing added to commit but untracked files present (use "git add" to track)
-
+///////////////////////////////////////////////
 
 D:\Programming\Projects\EducationalPractice\Inis>git status
 On branch master
@@ -19,3 +19,7 @@ Untracked files:
         task1/
 
 nothing added to commit but untracked files present (use "git add" to track)
+///////////////////////////////////////////////
+
+On branch master
+nothing to commit, working tree clean
