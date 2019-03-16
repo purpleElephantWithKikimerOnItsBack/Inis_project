@@ -1,551 +1,439 @@
 body {
-	background: #dcdcdc;
+	position: relative;
+	background: #E7E5E7;
 }
 
-.header {
+header {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	height: 62px;
 	width: 100%;
-	background: #81589f;
-	border: 1.5px solid black;
+	height: 62px;
+	background: #3B3B6D;
+	align-content: center;
 	z-index: 5;
 }
 
-.title {
+.logo {
 	position: relative;
-	left: 5px;
-	top: 10px;
-	height: 100%;
-	width: 30%;
-	font-size: 26pt;
+	width: 600px;
+	height: 62px;
+	margin: auto;
 }
 
-.profile {
-	position: fixed;
-	top: 4px;
-	right: 10px;
-	height: 55px;
-	width: 80px;
-	background: #81589f;
+.logo-cross {
+	height: 60px;
 }
 
-.profile-small {
-	position: absolute;
-	top: 62px;
-	right: 0px;
-	height: 58px;
-	width: 270px;
-	border: 1.5px solid black;
-	z-index: 1;
-	background: #8582bc;
-	display: none;
-}
-
-.profile-photo {
-	position: absolute;
-	top: -1px;
-	right: 0px;
-	height: 55px;
-	border: 2px solid black;
-	margin-left: 10px;
-}
-
-.nick {
+.title {
 	position: absolute;
 	top: 5px;
-	right: 80px;
-	font-size: 20pt;
-}
-
-.exit-button {
-	position: absolute;
-	bottom: 0px;
-	right: 80px;
-	width: 50px;
-	font-size: 8pt;
-	background: #e08860;
-	border: 1px solid black;
-}
-
-/*.login-button {
-	position: fixed;
-	right: 15px;
-	top: 3%;
-	font-size: 2.5vh;
-	background: purple;
-	border: none;
-}
-
-.login-button:hover {
-	color: lightgray;
-}*/
-
-.filters-list {
-	position: fixed;
-	right: 20px;
-	top: 80px;
-	width: 200px;
-	height: 90px;
-	background: white;
-	border: 1px solid black;
-	z-index: 2;
-}
-
-.filters-list-title {
-	position: relative;
-	top: 3px;
-	font-size: 22pt;
-}
-
-.filters-add-button {
-	position: absolute;
-	bottom: 6px;
-	right: 4px;
-	background: #e08860;
-	border: 1px solid black;
-}
-
-.filters-add-button-small {
-	top: 130px;
-}
-
-.upload-area {
-	position: fixed;
-	left: 20px;
-	top: 80px;
-	width: 200px;
-	height: 140px;
-	background: white;
-	border: 1px solid black;
-	text-align: center;
-	z-index: 2;
-}
-
-.upload-area-title {
-	position: relative;
-	top: 45%;
-	font-size: 14pt;
-	color: #dcdcdc;
-	display: block;
-}
-
-.upload-area-button {
-	position: absolute;
-	top: 102%;
-	left: 2px;
-	width: 98%;
-	background: #e08860;
-	border: 1px solid black;
+	left: 60px;
+	font-size: 34pt;
 }
 
 .go-up-button {
 	position: fixed;
-	left: 20px;
-	top: 250px;
+	left: 0px;
+	top: 62px;
 	height: 100%;
-	width: 100px;
+	width: 125px;
+	padding-top: 20px;
+	padding-bottom: 700px;
 	border: none;
-	color: #dcdcdc;
-	background: #dcdcdc;
-	padding-bottom: 45%;
+	background: #E7E5E7;
+	color: #E7E5E7;
+	z-index: 2;
 }
 
 .go-up-button:hover {
-	background: #f4f4f4;
-	color: lightgray;
+	background: lightgray;
+	color: gray;
+}
+
+.go-up-button:active {
+	background: #EEEEEE;
 }
 
 .go-up-button:focus {
 	outline: 0;
 }
 
-.go-up-button-small {
-	top: 450px;
+@media screen and (max-width: 1290px) {
+	.go-up-button {
+		top: 396px;
+	}
 }
 
-.small-button {
+.profile-area {
+	position: relative;
+	top: 63px;
+	width: 600px;
+	height: 231px;
+	margin: auto;
+	border-radius: 3px;
+	background: white;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.profile-photo-container {
 	position: fixed;
+	top: 71px;
 	left: 0px;
-	width: 55px;
-	height: 55px;
-	font-size: 12pt;
-	background: #8582bc;
-	color: white;
-	border: 1px solid black;
-	z-index: 1;
-	display: none;
+	height: 328px;
+	width: 100%;
+}
+
+.area-stick-to {
+	position: relative;
+	height: 536px;
+	width: 600px;
+	margin: auto;
+}
+
+.filter-area {
+	position: absolute;
+	top: 0px;
+	right: -218px;
+	height: 115px;
+	width: 212px;
+	background: #E7E5E7;
+	border-radius: 3px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.filter-area:hover {
+	background: white;
+}
+
+.filter-area-title {
+	height: 50px;
+	text-align: center;
+	padding-top: 40px;
+	margin: auto;
+	color: #E7E5E7;
+	font-size: 14pt;
+}
+
+.filter-area:hover .filter-area-title {
+	color: darkgray;
+}
+
+.add-filter-button {
+	position: absolute;
+	right: 4px;
+	bottom: 4px;
+	height: 20px;
+	width: 50px;
+	color: #E7E5E7;
+	background: #E7E5E7;
+	border: 1.5px solid #E7E5E7;
+}
+
+.filter-area:hover .add-filter-button {
+	color: black;
+	background: white;
+	border: 1.5px solid white;
+	border-radius: 3px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.filter-area:hover .add-filter-button:active {
+	border: 1.5px solid lightblue;
+	box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.add-filter-button:focus {
+	outline: 0;
+}
+
+.dragndrop-area {
+	position: absolute;
+	top: 326px;
+	left: -218px;
+	height: 209px;
+	width: 212px;
+	background: #E7E5E7;
+	border-radius: 3px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.dragndrop-area:hover {
+	background: white;
+}
+
+.dragndrop-area-title {
+	height: 105px;
+	padding-top: 90px;
+	text-align: center;
+	margin: auto;
+	color: #E7E5E7;
+	font-size: 14pt;
+}
+
+.dragndrop-area:hover .dragndrop-area-title {
+	color: darkgray;
+}
+
+.profile-photo-area {
+	position: absolute;
+	top: 0px;
+	left: -218px;
+	height: 316px;
+	width: 206px;
+	padding: 3px;
+	background: white;
+	border-radius: 3px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.profile-photo {
+	position: relative;
+	height: 250px;
+	width: 200px;
+	margin-bottom: 5px;
+	border: 3px solid black;
+	box-shadow: 0 0 10px rgba(0,0,0,0.9);
+}
+
+.button {
+	border: 1.5px solid white;
+	border-radius: 3px;
+	background: white;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 .button:active {
-	-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.8);
-	-moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.8);
-	box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.8);
-	border: solid 1px gray;
-}
-
-.button:hover {
-	-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.4);
-	-moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.4);
-	box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.4);
+	border: 1.5px solid lightblue;
+	box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
 .button:focus {
 	outline: 0;
 }
 
-.upload-button-small {
+.profile-button {
+	left: 30px;
+	width: 150px;
+}
+
+.change-photo-button {
+	position: absolute;
+	bottom: 35px;
+}
+
+.log-out-button {
+	position: absolute;
+	bottom: 10px;
+}
+
+.profile-info-area {
+	position: relative;
+	width: 364px;
+	height: 231px;
+	margin: auto;
+}
+
+.nickname {
+	position: relative;
+	top: 5px;
+	left: 5px;
+	width: 280px;
+	height: 40px;
+	border-radius: 5px;
+	text-align: center;
+	font-size: 24pt;
+	background: #F88379;
+	box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.general-info {
+	position: absolute;
+	left: 40px;
 	top: 70px;
+	width: 230px;
+	height: 141px;
+	text-align: center;
+}
+
+.profile-info {
+	position: absolute;
+	left: 300px;
+	top: 70px;
+	width: 230px;
+	height: 141px;
+	text-align: center;
+}
+
+.info-title {
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.info-list {
+	position: relative;
+	left: 25px;
+	width: 70%;
+	list-style: none;
+	padding: 5px;
+	margin: 0px;
+	margin-top: 10px;
+}
+
+.info-list li {
+	font-size: 14pt;
+	margin-bottom: 5px;
 }
 
 .news-area {
 	position: relative;
+	top: 80px;
+	width: 600px;
 	height: 100%;
-	width: 800px;
-	margin-bottom: 20px;
+	margin: auto;
+	margin-bottom: 100px;
+	border-radius: 3px;
 	background: white;
-	border: 1px solid black;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 .posts {
 	list-style: none;
-	margin-top: 9%;
-	padding-top: 20px;
-	padding-left: 0px;
-	width: 85%;
+	margin: 0px;
+	margin-top: 10px;
+	padding: 0px;
+	width: 100%;
 }
 
 .post {
-	position: relative;
-	border: 2px solid black;
-	margin-bottom: 50px;
-	width: 60%;
-	padding: 8px 14px 10px 12px;
+	width: 100%;
+	margin-bottom: 30px;
+	padding-top: 10px;
+	border-radius: 3px;
+	background: #CACBDC;
 }
 
 .photo-container {
 	position: relative;
+	width: 90%;
+	margin: auto;
 }
 
-.post img {
-	border: 2px solid black;
+.photo {
 	width: 100%;
-}
-
-.underphoto-text {
-	list-style: none;
-	text-align: left;
-	padding-left: 0;
-}
-
-.post-description {
-	height: 60px;
-	overflow: overlay;
-}
-
-.load-button {
-	border: 1px solid black;
-	background: white;
-	font-size: 14pt;
-	margin-bottom: 20px;
-}
-
-.like-button {
-	bottom: -40px;
-	right: -2px;
-	background: #dc78ad;
-}
-
-.edit-button {
-	top: 2px;
-	right: 42px;
-	background: #e8a765;
-}
-
-.remove-button {
-	top: 2px;
-	right: -2px;
-	background: #e08860;
+	border: 3px solid black;
+	box-shadow: 0 0 10px rgba(0,0,0,1);
 }
 
 .photo-button {
 	position: absolute;
-	height: 40px;
-	width: 40px;
-	opacity: 0.6;
-	border: 1px solid black;
-	border-radius: 5px;
+	bottom: -50px;
+	height: 46px;
+	width: 46px;
+	border: 1.5px solid;
 }
 
-/* .show-buttons-button {
+.like-button {
+	right: -5px;
+	border-color: #EBB0D7;
+	background: #EBB0D7;
+}
+
+.like-button:active {
+	border-color: #EBB0D7;
+}
+
+.hide-reveal-button {
 	position: absolute;
-	right: -2px;
-	top: 2px;
-	width: 15px;
-	height: 25px;
-	background: white;
-	border: none;
+	bottom: -50px;
+	right: 50px;
+	height: 46px;
+	width: 10px;
+	background: url(images/site_images/button-arrow.png);
+	background-repeat: no-repeat;
+	border: 1.5px solid #CACBDC;
+	border-radius: 3px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
-.show-buttons-button:focus {
+.hide-reveal-button:active {
+	box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.hide-reveal-button:focus {
 	outline: 0;
-} */
+}
+
+.edit-button {
+	right: 50px;
+	border-color: #FDDB6D;
+	background: #FDDB6D;
+	display: none;
+}
+
+.edit-button:active {
+	border-color: #FDDB6D;
+}
+
+.remove-button {
+	right: 104px;
+	border-color: #E63E62;
+	background: #E63E62;
+	display: none;
+}
+
+.remove-button:active {
+	border: #E63E62;
+}
+
+.underphoto-text {
+	list-style: none;
+	padding: 5%;
+	padding-top: 5px;
+}
+
+.post-description {
+	max-height: 60px;
+	overflow: hidden;
+}
+
+.load-more-button-container {
+	position: relative;
+	height: 50px;
+	width: 300px;
+	margin: auto;
+}
+
+.load-more-button {
+	width: 300px;
+}
 
 footer {
 	position: relative;
 	bottom: 0px;
+	left: 0px;
 	width: 100%;
-	height: 125px;
-	background: #dc78ad;
-	border: 1px solid black;
-	font-size: 12pt;
-	margin-bottom: 0px;
-	margin-top: 0px;
+	height: 120px;
+	margin: 0px;
+	background: #CACBDC;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+	z-index: 3;
 }
 
-footer > ul {
+.footer-list-area {
+	position: relative;
+	width: 300px;
+	height: 120px;
+	margin: auto;
+	padding-top: 1px;
+}
+
+.footer-list-area ul {
 	list-style: none;
-	padding-right: 30px;
 }
 
-@media screen and (min-width: 2000px) {
-	.news-area {
-		width: 1400px;
-	}
-
-	.header {
-		height: 100px;
-	}
-
-	.title {
-		padding-top: 10px;
-		font-size: 40pt;
-	}
-
-	.profile {
-		height: 95px;
-	}
-
-	.profile-photo {
-		height: 95px;
-	}
-
-	.nick {
-		font-size: 36pt;
-		right: 150px;
-	}
-
-	.exit-button {
-		font-size: 20pt;
-		right: 150px;
-		width: 80px;
-		padding-top: 2px;
-	}
-
-	.upload-area {
-		top: 120px;
-		width: 400px;
-		height: 300px;
-	}
-
-	.upload-area-title {
-		font-size: 24pt;
-	}
-
-	.upload-area-button {
-		font-size: 16pt;
-	}
-
-	.filters-list {
-		top: 120px;
-		width: 300px;
-		height: 150px;
-	}
-
-	.filters-add-button {
-		font-size: 16pt;
-	}
-
-	.filters-list-title {
-		font-size: 24pt;
-	}
-
-	.photo-button {
-		height: 80px;
-		width: 80px;
-	}
-
-	.edit-button {
-		right: 82px;
-	}
-}
-
-@media screen and (max-width: 1350px) {
-	.news-area {
-		width: 600px;
-	}
-
-	.photo-button {
-		width: 36px;
-		height: 36px;
-	}
-
-	.edit-button {
-		right: 38px;
-	}
-}
-
-@media screen and (max-width: 1050px) {
-	.news-area {
-		width: 100%;
-		padding-top: 10px;
-	}
-
-	.upload-area {
-		display: none;
-	}
-
-	.filters-list {
-		display: none;
-	}
-
-	.posts {
-		width: 100%;
-	}
-
-	.small-button {
-		height: 80px;
-		width: 80px;
-		display: block;
-	}
-
-	.upload-button-small {
-		top: 90px;
-	}
-
-	.filters-add-button-small {
-		top: 180px;
-	}
-
-	.photo-button {
-		height: 50px;
-		width: 50px;
-	}
-
-	.like-button {
-		bottom: -50px;
-	}
-
-	.edit-button {
-		right: 52px;
-	}
-
-	.header {
-		height: 70px;
-	}
-
-	.title {
-		left: 10px;
-		top: 14px;
-		font-size: 28pt;
-	}
-
-	.profile {
-		height: 65px;
-	}
-
-	.profile-photo {
-		height: 65px;
-	}
-
-	.nick {
-		right: 100px;
-	}
-
-	.exit-button {
-		right: 100px;
-	}
-
-	.go-up-button {
-		display: none;
-	}
-}
-
-@media screen and (max-width: 700px) {
-	.small-button {
-		height: 65px;
-		width: 65px;
-		display: block;
-	}
-
-	.filters-add-button-small {
-		top: 155px;
-	}
-
-	.photo-button {
-		height: 40px;
-		width: 40px;
-	}
-
-	.edit-button {
-		right: 42px;
-	}
-
-	.go-up-button {
-		display: none;
-	}
-}
-
-@media screen and (max-width: 380px) {
-	.small-button {
-		height: 45px;
-		width: 45px;
-	}
-
-	.upload-button-small {
-		top: 70px;
-	}
-
-	.filters-add-button-small {
-		top: 115px;
-	}
-
-	.profile {
-		display: none;
-	}
-
-	.title {
-		bottom: 5px;
-		width: 100%;
-		text-align: center;
-	}
-
-	.header {
-		height: 58px;
-	}
-
-	.profile-small {
-		display: block;
-	}
-
-	.news-area {
-		padding-top: 75px;
-	}
-
-	.profile-photo {
-		top: 2px;
-		height: 50px;
-		margin-right: 3px;
-	}
-
-	.exit-button {
-		bottom: 3px;
-	}
-
-	.go-up-button {
-		display: none;
-	}
+.footer-list-area li {
+	text-align: center;
 }
 
 ::-webkit-scrollbar {
