@@ -59,9 +59,21 @@ header {
 	outline: 0;
 }
 
-@media screen and (max-width: 1290px) {
+@media screen and (max-width: 1295px) {
 	.go-up-button {
-		top: 396px;
+		display: none;
+	}
+}
+
+@media screen and (max-width: 1045px) {
+	.go-up-button {
+		display: block;
+	}
+}
+
+@media screen and (max-width: 865px) {
+	.go-up-button {
+		display: none;
 	}
 }
 
@@ -74,6 +86,45 @@ header {
 	border-radius: 3px;
 	background: white;
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.profile-area-small {
+	position: relative;
+	top: 75px;
+	width: 600px;
+	height: 265px;
+	margin: auto;
+	border-radius: 3px;
+	background: white;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+.buttons-area-small {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 75px;
+	width: 380px;
+}
+
+.button-small {
+	position: relative;
+	top: 6px;
+	right: 3px;
+	width: 380px;
+	height: 25px;
+	margin-bottom: 6px;
+}
+
+@media screen and (max-width: 1045px) {
+	.profile-photo-container {
+		display: none;
+	}
+
+	.profile-area-small {
+		display: block;
+	}
 }
 
 .profile-photo-container {
@@ -185,6 +236,15 @@ header {
 	background: white;
 	border-radius: 3px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+@media screen and (max-width: 1045px) {
+	.profile-photo-area {
+		position: relative;
+		top: 1px;
+		left: 3px;
+		height: 255px;
+	}
 }
 
 .profile-photo {
