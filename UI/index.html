@@ -14,7 +14,7 @@
 				<div class="title nonselect">Inis_Project</div>
 			</div>
 		</header>
-		<a href="#top"><button class="go-up-button transition">Go Up</button></a>
+		<a href="#top"><button class="go-up-button transition"><div class="go-up-button-title">Go Up</div></button></a>
 		<div class="profile-area">
 			<div class="nickname">Kikimer's world</div>
 			<div class="general-info">
@@ -34,7 +34,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="profile-area-small">
+		<!-- <div class="profile-area-small">
 			<div class="profile-photo-area">
 				<img class="profile-photo" src="images/profile.jpg"/>
 			</div>
@@ -44,7 +44,7 @@
 				<button class="button-small button button-transition">Add post</button>
 				<button class="button-small button button-transition">Add filter</button>
 			</div>
-		</div>
+		</div> -->
 		<div class="profile-photo-container">
 			<div class="area-stick-to">
 				<div class="profile-photo-area">
@@ -67,26 +67,48 @@
 		</div>
 		<div class="news-area">
 			<ul class="posts">
-				<li class="post">
-					<div class="photo-container">
-						<img class="photo" src="images/alien.jpg"/>
-						<button class="like-button button button-transition opacity"></button>
-						<button class="edit-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Edit post</span>
-							</div>
-						</button>
-						<button class="remove-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Remove post</span>
-							</div>
-						</button>
-					</div>
-					<ul class="underphoto-text">
-						<li>26.02.2019: kikimer</li>
-						<li>#hashtag#image</li><br/>
-					</ul>
-				</li>
+				<template id="posttemplate">
+					<li class="post">
+						<div class="photo-container">
+							<img class="photo" src=""/>
+							<button class="like-button button button-transition opacity"></button>
+							<button class="edit-button button button-transition opacity">
+								<div class="tooltip">
+									<span class="tooltiptext">Edit post</span>
+								</div>
+							</button>
+							<button class="remove-button button button-transition opacity">
+								<div class="tooltip">
+									<span class="tooltiptext">Remove post</span>
+								</div>
+							</button>
+						</div>
+						<ul class="underphoto-text">
+							<li></li>
+							<li></li><br/>
+						</ul>
+					</li>
+				</template>
+					<!-- <li class="post">
+						<div class="photo-container">
+							<img id="post-image" class="photo" src="images/alien.jpg"/>
+							<button class="like-button button button-transition opacity"></button>
+							<button class="edit-button button button-transition opacity">
+								<div class="tooltip">
+									<span class="tooltiptext">Edit post</span>
+								</div>
+							</button>
+							<button class="remove-button button button-transition opacity">
+								<div class="tooltip">
+									<span class="tooltiptext">Remove post</span>
+								</div>
+							</button>
+						</div>
+						<ul class="underphoto-text">
+							<li id="date-author">26.02.2019: kikimer</li>
+							<li id="hashtags">#hashtag#image</li><br/>
+						</ul>
+					</li> -->
 				<li class="post">
 					<div class="photo-container">
 						<img class="photo" src="images/aliens.jpg"/>
@@ -283,7 +305,8 @@
 				</ul>
 			</div>
 		</footer>
-		<script src="scripts/photoPosts.js"></script>
-		<script src="scripts/index.js"></script>
+		<script src="scripts/PhotoPosts.js"></script>
+		<script src="scripts/PostCollection.js"></script>
+		<script src="scripts/NewsArea.js"></script>
 	</body>
 </html>
