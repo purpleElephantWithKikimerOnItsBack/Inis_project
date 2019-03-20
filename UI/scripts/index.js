@@ -106,7 +106,7 @@ class PostCollection {
   }
 
   clear() {
-    this._posts.splice(0, this._posts.length);
+    this._posts.length = 0;
   }
 
   static validate(post) {
@@ -120,88 +120,11 @@ class PostCollection {
       likes,
     } = post;
 
-    if (!id) return false;
-    if (!description || description.length > 199) return false;
-    if (!createdAt || !(createdAt instanceof Date)) return false;
-    if (!author) return false;
-    if (!photoLink) return false;
-    if (!hashTags) return false;
-    if (!likes) return false;
+    if (!id || !description || description.length > 199 || !createdAt
+      || !author || !photoLink || !hashTags || !likes) {
+      return false;
+    }
 
     return true;
   }
 }
-
-
-const posts = new PostCollection(photoPosts);
-
-console.log(posts.getPage());
-console.log(posts.getPage(5));
-console.log(posts.getPage(5, 3));
-console.log(posts.getPage(5, 3, { author: 'kikimer' }));
-console.log('-----------------');
-
-console.log(posts.get('1'));
-console.log(posts.get('25'));
-
-console.log(PostCollection.validate(photoPosts[3]));
-console.log(PostCollection.validate({
-  id: '1',
-  description: '',
-  createdAt: new Date(),
-  author: 'kikimer',
-  photoLink: 'this is photoLink',
-  hashTags: [],
-  likes: [],
-}));
-
-const post = {
-  id: '21',
-  description: 'this is a description',
-  createdAt: new Date(),
-  author: 'kikimer',
-  photoLink: 'this is photoLink',
-  hashTags: [],
-  likes: [],
-};
-console.log(PostCollection.validate(post));
-
-console.log(posts.add(post));
-console.log(posts.get('21'));
-console.log('------------------');
-console.log(posts.edit('21', {
-  author: 'jinglebells',
-  description: 'this is changed description',
-  id: '90',
-  createdAt: new Date('2018-03-05'),
-  photoLink: 'this is changed photoLink fu',
-  likes: ['new', 'likes'],
-  hashTags: ['new', 'hashTags'],
-}));
-console.log(posts.get('21'));
-console.log(posts.remove('21'));
-console.log(posts.get('21'));
-
-
-const postArr = [
-  {
-    id: '78',
-    description: 'description',
-    createdAt: new Date(),
-    author: 'kikimer',
-    photoLink: 'photoLink',
-    hashTags: [],
-    likes: [],
-  },
-  {
-    id: '',
-    description: 'description',
-    createdAt: new Date(),
-    author: 'kikimer',
-    photoLink: 'photoLink',
-    hashTags: [],
-    likes: [],
-  },
-];
-console.log(posts.addAll(postArr));
-console.log(posts.get('78'));

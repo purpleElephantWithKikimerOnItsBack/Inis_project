@@ -1,9 +1,7 @@
-'use strict';
-
-(function() {
-  function getPhotoPosts(start=0, count=10, filter={}) {
-    let posts = photoPosts.filter(function(post) {
-      if (parseInt(post.id) <= start) {
+const module = (() => {
+  function getPhotoPosts(start = 0, count = 10, filter = {}) {
+    const posts = photoPosts.filter((post) => {
+      if (parseInt(post.id, 10) <= start) {
         return false;
       }
 
@@ -14,10 +12,10 @@
       }
 
       if (filter.createdAt) {
-        let current = filter.createdAt;
+        const current = filter.createdAt;
         current.setHours(0, 0, 0, 0);
 
-        let next = new Date();
+        const next = new Date();
         next.setDate(current.getDate() + 1);
         next.setHours(0, 0, 0, 0);
 
@@ -27,44 +25,48 @@
       }
 
       if (filter.hashTags && filter.hashTags.length) {
-        return post.hashTags.some(function(tag) {
-          return filter.hashTags.includes(tag);
-        });
+        return post.hashTags.some(tag => filter.hashTags.includes(tag));
       }
       return true;
     });
 
-    posts.sort(function(x, y) {
-      return x.createdAt.getTime() > y.createdAt.getTime();
-    });
+    posts.sort((x, y) => x.createdAt.getTime() > y.createdAt.getTime());
 
-    return  posts.splice(0, count);
+    return posts.splice(0, count);
   }
 
 
   console.log('getPhotoPosts(start: number, count: number, filter: object):\n');
-  console.log( getPhotoPosts() );
-  console.log( getPhotoPosts(5) );
-  console.log( getPhotoPosts(5, 3) );
-  console.log( getPhotoPosts(5, 3, { author: 'kikimer' }) );
-  console.log( getPhotoPosts(5, 3, { author: '2cupsofrolton' }) );
-  console.log( getPhotoPosts(5, 4, { author: 'kikimer', hashTags: ['reptiloids', 'supra'] }) );
-  console.log( getPhotoPosts(4, 6, { createdAt: new Date('2019-03-05T22:01:12') }) );
+  console.log(getPhotoPosts());
+  console.log(getPhotoPosts(5));
+  console.log(getPhotoPosts(5, 3));
+  console.log(getPhotoPosts(5, 3, { author: 'kikimer' }));
+  console.log(getPhotoPosts(5, 3, { author: '2cupsofrolton' }));
+  console.log(getPhotoPosts(5, 4, { author: 'kikimer', hashTags: ['reptiloids', 'supra'] }));
+  console.log(getPhotoPosts(4, 6, { createdAt: new Date('2019-03-05T22:01:12') }));
 
 
   function getPhotoPost(id) {
-    return photoPosts.find((post) => post.id === id);
+    return photoPosts.find(post => post.id === id);
   }
 
 
   console.log('---------------------\ngetPhotoPost(id: string) function:\n');
-  console.log( getPhotoPost('3') );
-  console.log( getPhotoPost('25') );
+  console.log(getPhotoPost('3'));
+  console.log(getPhotoPost('25'));
 
 
   function validatePhotoPost(photoPost) {
-    const {id, description, createdAt, author, photoLink, hashTags, likes} = photoPost;
-    
+    const {
+      id,
+      description,
+      createdAt,
+      author,
+      photoLink,
+      hashTags,
+      likes,
+    } = photoPost;
+
     if (!id) { return false; }
     if (!description || description.length > 199) { return false; }
     if (!createdAt || !(createdAt instanceof Date)) { return false; }
@@ -78,41 +80,44 @@
 
 
   console.log('---------------------\nvalidatePhotoPost(post: object) function:\n');
-  console.log( validatePhotoPost(photoPosts[0]) );
-  console.log( validatePhotoPost( {
+  console.log(validatePhotoPost(photoPosts[0]));
+  console.log(validatePhotoPost({
     id: '',
     description: 'this is description',
     author: 'kikimer',
     createdAt: new Date(),
     photoLink: 'this is link',
     hashTags: ['this', 'are', 'hashTags'],
-    likes: ['this', 'are', 'people', 'who', 'liked']
+    likes: ['this', 'are', 'people', 'who', 'liked'],
   }));
-  console.log( validatePhotoPost( {
+  console.log(validatePhotoPost({
     id: 1,
     description: 'this is description',
     author: 'kikimer',
     createdAt: new Date(),
     photoLink: 'this is link',
     hashTags: [],
-    likes: ['this', 'are', 'people', 'who', 'liked']
-  }));console.log( validatePhotoPost( {
+    likes: ['this', 'are', 'people', 'who', 'liked'],
+  }));
+  console.log(validatePhotoPost({
     id: '1',
     description: '',
     author: 'kikimer',
     createdAt: new Date(),
     photoLink: 'this is link',
     hashTags: ['this', 'are', 'hashTags'],
-    likes: ['this', 'are', 'people', 'who', 'liked']
-  }));console.log( validatePhotoPost( {
+    likes: ['this', 'are', 'people', 'who', 'liked'],
+  }));
+  console.log(validatePhotoPost({
     id: '',
     description: 4,
     author: 'kikimer',
     createdAt: new Date(),
     photoLink: 'this is link',
     hashTags: ['this', 'are', 'hashTags'],
-    likes: ['this', 'are', 'people', 'who', 'liked']
-  }));console.log( validatePhotoPost( {
+    likes: ['this', 'are', 'people', 'who', 'liked'],
+  }));
+  console.log(validatePhotoPost({
     id: '1',
     description: 'this is descriptionthis is descriptionthis is descriptionthis is descriptionthis is descriptionthis is descriptionthis is descriptionthis is descriptionthis is descriptionthis is descriptionthis is descriptionthis is descriptionthis is descriptionthis is description',
     author: 'kikimer',
@@ -120,22 +125,24 @@
     photoLink: 'this is link',
     hashTags: ['this', 'are', 'hashTags'],
     likes: ['this', 'are', 'people', 'who', 'liked']
-  }));console.log( validatePhotoPost( {
+  }));
+  console.log(validatePhotoPost({
     id: '1',
     description: 'this is description',
     author: 'kikimer',
     createdAt: 'new Date()',
     photoLink: 'this is link',
     hashTags: '',
-    likes: 4
-  }));console.log( validatePhotoPost( {
+    likes: 4,
+  }));
+  console.log(validatePhotoPost({
     id: '',
     description: 'this is description',
     author: 'kikimer',
     createdAt: new Date(),
     photoLink: 'this is link',
     hashTags: ['this', 'are', 'hashTags'],
-    likes: ['this', 'are', 'people', 'who', 'liked']
+    likes: ['this', 'are', 'people', 'who', 'liked'],
   }));
 
 
@@ -143,43 +150,42 @@
     if (!validatePhotoPost(photoPost)) {
       return false;
     }
-
     photoPosts.push(photoPost);
     return true;
   }
 
 
   console.log('---------------------\naddPhotoPost(post: object) function:\n');
-  console.log( addPhotoPost({
+  console.log(addPhotoPost({
     id: '21',
     description: 'this is an example for adding this post into the array',
     createdAt: new Date('2019-03-09T22:34:00'),
     author: 'shpillie-willie',
     photoLink: 'images/willie.jpg',
     hashTags: ['sausage', 'bignlong'],
-    likes: ['hello', 'willie']
-  }) );
-  console.log( addPhotoPost({
+    likes: ['hello', 'willie'],
+  }));
+  console.log(addPhotoPost({
     id: '',
     description: 'this is an example for adding this post into the array',
     createdAt: new Date('2019-03-09T22:34:00'),
     author: 'shpillie-willie',
     photoLink: 'images/willie.jpg',
     hashTags: [],
-    likes: ['hello', 'willie']
-  }) );
+    likes: ['hello', 'willie'],
+  }));
 
 
   function editPhotoPost(id, photoPost) {
-    let index = photoPosts.findIndex((post) => post.id === id);
+    const index = photoPosts.findIndex(post => post.id === id);
     if (index === -1) {
       return false;
     }
 
-    let postCopy = {};
-    for (let prop in photoPosts[index]) {
+    const postCopy = {};
+    Object.getOwnPropertyNames(photoPosts[index]).forEach((prop) => {
       postCopy[prop] = photoPosts[index][prop];
-    }
+    });
 
     const { description, photoLink, hashTags } = photoPost;
 
@@ -203,15 +209,20 @@
 
 
   console.log('---------------\nchecking editPhotoPost(id: string, photoPost: object) function:');
-  console.log( editPhotoPost('4', { author: 'moron5', description: 'changed' }));
-  console.log( getPhotoPost('4') );
-  console.log( editPhotoPost('5', { author: 'moron5', description: 'changed', photoLink: 'changed',
-                                     hashTags: ['this', 'are', 'new', 'hashTags'] , fakeProp: 'none' }) );
-  console.log( getPhotoPost('5') );
+  console.log(editPhotoPost('4', { author: 'moron5', description: 'changed' }));
+  console.log(getPhotoPost('4'));
+  console.log(editPhotoPost('5', {
+    author: 'moron5',
+    description: 'changed',
+    photoLink: 'changed',
+    hashTags: ['this', 'are', 'new', 'hashTags'],
+    fakeProp: 'none',
+  }));
+  console.log(getPhotoPost('5'));
 
 
   function removePhotoPost(id) {
-    let index = photoPosts.findIndex((post) => post.id === id);
+    const index = photoPosts.findIndex(post => post.id === id);
     if (index === -1) {
       return false;
     }
@@ -220,6 +231,6 @@
     return true;
   }
 
-  console.log( removePhotoPost('7') );
+  console.log(removePhotoPost('7'));
   console.log(photoPosts);
 })();
