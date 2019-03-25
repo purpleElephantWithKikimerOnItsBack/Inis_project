@@ -16,7 +16,7 @@
 		</header>
 		<a href="#top"><button class="go-up-button transition"><div class="go-up-button-title">Go Up</div></button></a>
 		<div class="profile-area">
-			<div class="nickname">Kikimer's world</div>
+			<div id="author" class="nickname">kikimer</div>
 			<div class="general-info">
 				<span class="info-title">General</span>
 				<ul class="info-list">
@@ -34,34 +34,34 @@
 				</ul>
 			</div>
 		</div>
-		<!-- <div class="profile-area-small">
-			<div class="profile-photo-area">
-				<img class="profile-photo" src="images/profile.jpg"/>
-			</div>
-			<div class="buttons-area-small">
-				<button class="button-small button button-transition">Change photo</button>
-				<button class="button-small button button-transition">Log out</button>
-				<button class="button-small button button-transition">Add post</button>
-				<button class="button-small button button-transition">Add filter</button>
-			</div>
-		</div> -->
 		<div class="profile-photo-container">
 			<div class="area-stick-to">
-				<div class="profile-photo-area">
-					<img class="profile-photo" src="images/profile.jpg"/>
+				<div id="profile-area" class="profile-photo-area">
+					<img class="profile-photo nonselect" src="images/profile.jpg"/>
 					<button class="profile-button change-photo-button button button-transition">Change photo</button>
 					<button class="profile-button log-out-button button button-transition">Log out</button>
 				</div>
-				<div class="dragndrop-area transition">
+				<div id="drop-area" class="dragndrop-area transition">
 					<div class="dragndrop-area-title nonselect">
 						Drag And Drop
 					</div>
+				</div>
+				<div id="description-area" class="description-area">
+					<textarea id="description" class="textarea" placeholder="description" maxlength="199"></textarea>
+					<input id="hashtags" class="hashtags" type="text" placeholder="hashtags"/>
+					<button id="cancel-button" onclick="dropArea.onCancelButtonClick(event)" class="add-post-button button button-transition">Cancel</button>
+					<button id="add-post-button" onclick="dropArea.onAddPostButtonClick(event)" class="cancel-button button button-transition">Add</button>
 				</div>
 				<div class="filter-area transition">
 					<div class="filter-area-title nonselect">
 						Filters
 					</div>
 					<button class="add-filter-button transition">Add</button>
+				</div>
+				<div id="error-box" class="error-box">
+					<div></div>
+					<button class="error-box-ok button button-transition" onclick="newsArea.removePost(event)">Ok</button>
+					<button class="error-box-cancel button button-transition" onclick="messageBox.hideErrorMessage()">Cancel</button>
 				</div>
 			</div>
 		</div>
@@ -71,17 +71,7 @@
 					<li class="post">
 						<div class="photo-container">
 							<img class="photo" src=""/>
-							<button class="like-button button button-transition opacity"></button>
-							<button class="edit-button button button-transition opacity">
-								<div class="tooltip">
-									<span class="tooltiptext">Edit post</span>
-								</div>
-							</button>
-							<button class="remove-button button button-transition opacity">
-								<div class="tooltip">
-									<span class="tooltiptext">Remove post</span>
-								</div>
-							</button>
+							<button class="like-button button button-transition opacity" onclick="newsArea.likePost(event)"></button>
 						</div>
 						<ul class="underphoto-text">
 							<li></li>
@@ -89,209 +79,21 @@
 						</ul>
 					</li>
 				</template>
-					<!-- <li class="post">
-						<div class="photo-container">
-							<img id="post-image" class="photo" src="images/alien.jpg"/>
-							<button class="like-button button button-transition opacity"></button>
-							<button class="edit-button button button-transition opacity">
-								<div class="tooltip">
-									<span class="tooltiptext">Edit post</span>
-								</div>
-							</button>
-							<button class="remove-button button button-transition opacity">
-								<div class="tooltip">
-									<span class="tooltiptext">Remove post</span>
-								</div>
-							</button>
+				<template id="edit-remove-buttons">
+					<button class="edit-button button button-transition opacity" onclick="dropArea.editPost(event)">
+						<div class="tooltip">
+							<span class="tooltiptext">Edit post</span>
 						</div>
-						<ul class="underphoto-text">
-							<li id="date-author">26.02.2019: kikimer</li>
-							<li id="hashtags">#hashtag#image</li><br/>
-						</ul>
-					</li> -->
-				<li class="post">
-					<div class="photo-container">
-						<img class="photo" src="images/aliens.jpg"/>
-						<button class="like-button button button-transition opacity"></button>
-						<button class="edit-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Edit post</span>
-							</div>
-						</button>
-						<button class="remove-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Remove post</span>
-							</div>
-						</button>
-					</div>
-					<ul class="underphoto-text">
-						<li>26.02.2019: kikimer</li>
-						<li>#hashtag#image</li><br/>
-					</ul>
-				</li>
-				<li class="post">
-					<div class="photo-container">
-						<img class="photo" src="images/bubble.jpg"/>
-						<button class="like-button button button-transition opacity"></button>
-						<button class="edit-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Edit post</span>
-							</div>
-						</button>
-						<button class="remove-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Remove post</span>
-							</div>
-						</button>
-					</div>
-					<ul class="underphoto-text">
-						<li>01.03.2019: kikimer</li>
-						<li>#hashtag#image</li><br/>
-					</ul>
-				</li>
-				<li class="post">
-					<div class="photo-container">
-						<img class="photo" src="images/whale.jpg"/>
-						<button class="like-button button button-transition opacity"></button>
-						<button class="edit-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Edit post</span>
-							</div>
-						</button>
-						<button class="remove-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Remove post</span>
-							</div>
-						</button>
-					</div>
-					<ul class="underphoto-text">
-						<li>26.02.2019: kikimer</li>
-						<li>#hashtag#image</li><br/>
-					</ul>
-				</li>
-				<li class="post">
-					<div class="photo-container">
-						<img class="photo" src="images/girl_on_bicycle.jpg"/>
-						<button class="like-button button button-transition opacity"></button>
-						<button class="edit-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Edit post</span>
-							</div>
-						</button>
-						<button class="remove-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Remove post</span>
-							</div>
-						</button>
-					</div>
-					<ul class="underphoto-text">
-						<li>26.02.2019: kikimer</li>
-						<li>#hashtag#image</li><br/>
-					</ul>
-				</li>
-				<li class="post">
-					<div class="photo-container">
-						<img class="photo" src="images/reptiloids.jpg"/>
-						<button class="like-button button button-transition opacity"></button>
-						<button class="edit-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Edit post</span>
-							</div>
-						</button>
-						<button class="remove-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Remove post</span>
-							</div>
-						</button>
-					</div>
-					<ul class="underphoto-text">
-						<li>26.02.2019: kikimer</li>
-						<li>#hashtag#image</li><br/>
-					</ul>
-				</li>
-				<li class="post">
-					<div class="photo-container">
-						<img class="photo" src="images/spaceman.jpg"/>
-						<button class="like-button button button-transition opacity"></button>
-						<button class="edit-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Edit post</span>
-							</div>
-						</button>
-						<button class="remove-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Remove post</span>
-							</div>
-						</button>
-					</div>
-					<ul class="underphoto-text">
-						<li>26.02.2019: kikimer</li>
-						<li>#hashtag#image</li><br/>
-					</ul>
-				</li>
-				<li class="post">
-					<div class="photo-container">
-						<img class="photo" src="images/mecha.jpg"/>
-						<button class="like-button button button-transition opacity"></button>
-						<button class="edit-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Edit post</span>
-							</div>
-						</button>
-						<button class="remove-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Remove post</span>
-							</div>
-						</button>
-					</div>
-					<ul class="underphoto-text">
-						<li>26.02.2019: kikimer</li>
-						<li>#hashtag#image</li><br/>
-					</ul>
-				</li>
-				<li class="post">
-					<div class="photo-container">
-						<img class="photo" src="images/birdman.jpg"/>
-						<button class="like-button button button-transition opacity"></button>
-						<button class="edit-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Edit post</span>
-							</div>
-						</button>
-						<button class="remove-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Remove post</span>
-							</div>
-						</button>
-					</div>
-					<ul class="underphoto-text">
-						<li>26.02.2019: kikimer</li>
-						<li>#hashtag#image</li><br/>
-					</ul>
-				</li>
-				<li class="post">
-					<div class="photo-container">
-						<img class="photo" src="images/dolphin.jpg"/>
-						<button class="like-button button button-transition opacity"></button>
-						<button class="edit-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Edit post</span>
-							</div>
-						</button>
-						<button class="remove-button button button-transition opacity">
-							<div class="tooltip">
-								<span class="tooltiptext">Remove post</span>
-							</div>
-						</button>
-					</div>
-					<ul class="underphoto-text">
-						<li>26.02.2019: kikimer</li>
-						<li>#hashtag#image</li><br/>
-					</ul>
-				</li>
+					</button>
+					<button class="remove-button button button-transition opacity" onclick="newsArea.checkRemoval(event)">
+						<div class="tooltip">
+							<span class="tooltiptext">Remove post</span>
+						</div>
+					</button>
+				</template>
 			</ul>
 			<div class="load-more-button-container">
-				<button class="load-more-button button button-transition">Load more</button>
+				<button class="load-more-button button button-transition" onclick="newsArea.loadMore()">Load more</button>
 			</div>
 		</div>
 		<footer>
@@ -305,8 +107,10 @@
 				</ul>
 			</div>
 		</footer>
+		<script src="scripts/MessageBox.js"></script>
 		<script src="scripts/PhotoPosts.js"></script>
 		<script src="scripts/PostCollection.js"></script>
 		<script src="scripts/NewsArea.js"></script>
+		<script src="scripts/DropArea.js"></script>
 	</body>
 </html>

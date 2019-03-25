@@ -43,7 +43,6 @@ header {
 	border: none;
 	background: #E7E5E7;
 	color: #E7E5E7;
-	z-index: 2;
 }
 
 .go-up-button:hover {
@@ -74,6 +73,40 @@ header {
 	}
 }
 
+.error-box {
+	position: absolute;
+	bottom: 0px;
+	right: -250px;
+	height: 100px;
+	width: 200px;
+	border: none;
+	border-radius: 3px;
+	background: white;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	transition: 1s;
+}
+
+.error-box-ok {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	height: 20px;
+	width: 98px;
+	transition: 1s;
+	visibility: hidden;
+}
+
+.error-box-cancel {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	height: 20px;
+	width: 98px;
+	transition: 1s;
+	visibility: hidden;
+}
+
 .profile-area {
 	position: relative;
 	top: 63px;
@@ -84,45 +117,6 @@ header {
 	background: white;
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-
-/*.profile-area-small {
-	position: relative;
-	top: 75px;
-	width: 600px;
-	height: 265px;
-	margin: auto;
-	border-radius: 3px;
-	background: white;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	display: none;
-}
-
-.buttons-area-small {
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	height: 75px;
-	width: 380px;
-}
-
-.button-small {
-	position: relative;
-	top: 6px;
-	right: 3px;
-	width: 380px;
-	height: 25px;
-	margin-bottom: 6px;
-}*/
-
-/*@media screen and (max-width: 1045px) {
-	.profile-photo-container {
-		display: none;
-	}
-
-	.profile-area-small {
-		display: block;
-	}
-}*/
 
 .profile-photo-container {
 	position: fixed;
@@ -204,6 +198,7 @@ header {
 	background: #E7E5E7;
 	border-radius: 3px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+	z-index: 2;
 }
 
 .dragndrop-area:hover {
@@ -226,53 +221,62 @@ header {
 	color: darkgray;
 }
 
-@media screen and (max-height: 740px) {
-	.dragndrop-area {
-		height: 100px;
-		transition: 1s;
-	}
-
-	.dragndrop-area-title {
-		padding-top: 40px;
-		height: 60px;
-		transition: 1s;
-	}
+#add-post-image {
+	width: 212px;
+	height: 209px;
 }
 
-@media screen and (max-height: 635px) {
-	.dragndrop-area {
-		height: 0px;
-		visibility: hidden;
-	}
-
-	.dragndrop-area-title {
-		opacity: 0;
-	}
+.description-area {
+	position: absolute;
+	top: 326px;
+	left: -218px;
+	height: 209px;
+	width: 212px;
+	background: white;
+	border-radius: 3px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+	opacity: 0;
+	transition: 0.3s;
 }
 
-@media screen and (max-width: 1040px) {
-	.dragndrop-area {
-		width: 0px;
-	}
+.textarea {
+	position: absolute;
+	top: 20px;
+	left: 10px;
+	width: 187px;
+	height: 70px;
+	border: 1.5px solid lightblue;
+	resize: none;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	transition: 0.5s;
+}
 
-	.dragndrop-area-title {
-		opacity: 0;
-		transition: -0.2s;
-	}
+.hashtags {
+	position: absolute;
+	top: 110px;
+	left: 10px;
+	width: 191px;
+	border: 1.5px solid lightblue;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	transition: 0.5s;
+}
 
-	.filter-area {
-		width: 0px;
-	}
+.add-post-button {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	height: 20px;
+	width: 105px;
+	transition: 0.5s;
+}
 
-	.filter-area-title {
-		opacity: 0;
-		transition: -0.2s;
-	}
-
-	.add-filter-button {
-		width: 0px;
-		opacity: 0;
-	}
+.cancel-button {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	height: 20px;
+	width: 105px;
+	transition: 0.5s;
 }
 
 .profile-photo-area {
@@ -328,25 +332,6 @@ header {
 .log-out-button {
 	position: absolute;
 	bottom: 10px;
-}
-
-@media screen and (max-width: 1040px) {
-	.profile-photo-area {
-		width: 0px;
-		opacity: 0;
-		transition: 0.5s;
-	}
-
-	.profile-photo {
-		width: 0px;
-		opacity: 0;
-		transition: 0.5s;
-	}
-
-	.profile-button {
-		opacity: 0;
-		transition: -0.2s;
-	}
 }
 
 .profile-info-area {
@@ -574,7 +559,6 @@ footer {
 	margin: 0px;
 	background: #CACBDC;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-	z-index: 3;
 }
 
 .footer-list-area {
@@ -630,4 +614,67 @@ footer {
 
 ::-webkit-scrollbar-thumb:hover {
   background: gray; 
+}
+
+@media screen and (max-width: 1045px) {
+	.profile-photo-area, .dragndrop-area, .filter-area, .description-area,
+	.textarea, .hashtags, .add-post-button, .cancel-button {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	/*.description-area, .textarea, .hashtags, .add-post-button, .cancel-button {
+
+	}*/
+}
+
+
+@media screen and (max-height: 740px) {
+	.profile-photo-area {
+		left: -200px;
+		height: 260px;
+		width: 186px;
+	}
+
+	.profile-button {
+		left: 20px;
+	}
+
+	.profile-photo {
+		height: 194px;
+		width: 180px;
+	}
+
+	.dragndrop-area {
+		top: 270px;
+		left: -200px;
+		width: 192px;
+	}
+
+	.textarea {
+		width: 165px;
+	}
+
+	.hashtags {
+		width: 169px;
+	}
+
+	.add-post-button {
+		width: 95px;
+	}
+
+	.cancel-button {
+		width: 95px;
+	}
+
+	#add-post-image {
+		width: 192px;
+		height: 192px;
+	}
+
+	.description-area {
+		width: 192px;
+		height: 192px;
+		left: -200px;
+	}
 }
