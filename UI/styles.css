@@ -1,6 +1,7 @@
 body {
 	position: relative;
 	background: #E7E5E7;
+	margin: 0px;
 }
 
 header {
@@ -113,6 +114,7 @@ header {
 	width: 600px;
 	height: 231px;
 	margin: auto;
+	margin-top: 8px;
 	border-radius: 3px;
 	background: white;
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -137,39 +139,11 @@ header {
 	position: absolute;
 	top: 0px;
 	right: -218px;
-	height: 115px;
+	height: 55px;
 	width: 212px;
-	background: #E7E5E7;
 	border-radius: 3px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
-.filter-area:hover {
-	background: white;
-}
-
-.filter-area-title {
-	height: 50px;
-	text-align: center;
-	padding-top: 40px;
-	margin: auto;
-	color: #E7E5E7;
-	font-size: 14pt;
-}
-
-.filter-area:hover .filter-area-title {
-	color: darkgray;
-}
-
-.add-filter-button {
-	position: absolute;
-	right: 4px;
-	bottom: 4px;
-	height: 20px;
-	width: 50px;
-	color: #E7E5E7;
 	background: #E7E5E7;
-	border: 1.5px solid #E7E5E7;
 }
 
 .filter-area:hover .add-filter-button {
@@ -180,13 +154,148 @@ header {
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
+.filter-area-active {
+	background: white;
+}
+
+.filter-area-title {
+	height: 30px;
+	padding-top: 5px;
+	text-align: center;
+	margin: auto;
+	color: #E7E5E7;
+	font-size: 14pt;
+}
+
+.filter-area:hover .filter-area-title {
+	color: darkgray;
+}
+
+.filter-area-title-active {
+	color: darkgray;
+}
+
+.filters {
+	position: relative;
+	top: -18px;
+	list-style: none;
+	padding: 0;
+}
+
+.filter-item {
+	height: 20px;
+	width: 140px;
+	margin-left: 25px;
+	margin-bottom: 8px;
+	padding: 2px;
+	padding-bottom: 4px;
+	border-radius: 3px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-item-content {
+	width: 140px;
+	height: 20px;
+	overflow: hidden;
+}
+
+.remove-filter-button {
+	position: relative;
+	right: -145px;
+	top: -19px;
+	height: 15px;
+	width: 15px;
+	padding-right: 10px;
+	padding-bottom: 14px;
+	text-align: center;
+	border-radius: 3px;
+}
+
+.filter-options {
+	position: absolute;
+	bottom: -40px;
+	right: 0px;
+	width: 212px;
+	height: 30px;
+	border-radius: 3px;
+	border: none;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	opacity: 1;
+}
+
+.filter-cancel-button {
+	position: absolute;
+	bottom: -110px;
+	right: 70px;
+	width: 60px;
+	opacity: 1;
+}
+
+.filter-ok-button {
+	position: absolute;
+	bottom: -110px;
+	right: 0px;
+	width: 60px;
+	opacity: 1;
+}
+
+.filter-button-upper {
+	bottom: -70px;
+}
+
+.hidden {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.zero-height {
+	height: 0px;
+}
+
+.add-filter-button {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	height: 17px;
+	width: 212px;
+	color: #E7E5E7;
+	background: #E7E5E7;
+	border-radius: 3px;
+	border: 1.5px solid #E7E5E7;
+}
+
+.add-filter-button-active {
+	color: black;
+	background: white;
+	border-color: white;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
 .filter-area:hover .add-filter-button:active {
 	border: 1.5px solid lightblue;
 	box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
-.add-filter-button:focus {
-	outline: 0;
+.date-chooser {
+	position: absolute;
+	bottom: -80px;
+	right: 0px;
+	height: 30px;
+	width: 211px;
+	border-radius: 3px;
+	border: none;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.filter-inputer {
+	position: absolute;
+	bottom: -80px;
+	right: 0px;
+	height: 30px;
+	width: 212px;
+	border-radius: 3px;
+	border: none;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .dragndrop-area {
@@ -201,8 +310,13 @@ header {
 	z-index: 2;
 }
 
-.dragndrop-area:hover {
-	background: white;
+.upper-drop-area {
+	top: 0px;
+	visibility: hidden;
+}
+
+.highlight-droparea {
+	background: #3B3B6D;
 }
 
 .dragndrop-area-title {
@@ -220,23 +334,31 @@ header {
 .dragndrop-area:hover .dragndrop-area-title {
 	color: darkgray;
 }
-
+/*
 #add-post-image {
 	width: 212px;
 	height: 209px;
-}
+}*/
 
 .description-area {
 	position: absolute;
-	top: 326px;
+	top: 226px;
 	left: -218px;
 	height: 209px;
 	width: 212px;
 	background: white;
 	border-radius: 3px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
-	opacity: 0;
+	opacity: 1;
 	transition: 0.3s;
+}
+
+.add-post-image {
+	width: 212px;
+	height: 209px;
+	transition: 2s;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+	visibility: visible;
 }
 
 .textarea {
@@ -290,6 +412,7 @@ header {
 	border-radius: 3px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
 	transition: 0.5s;
+	z-index: 2;
 }
 
 .profile-photo {
@@ -300,6 +423,27 @@ header {
 	border: 3px solid black;
 	box-shadow: 0 0 10px rgba(0,0,0,0.9);
 	transition: 0.5s;
+}
+
+.input-field {
+	position: relative;
+	width: 200px;
+	margin-top: 10px;
+	margin-left: 2px;
+	text-align: center;
+	border-radius: 3px;
+	border: 1px solid lightgray;
+}
+
+.input-button {
+	position: relative;
+	left: 30px;
+	margin-top: 12px;
+}
+
+.hide-area {
+	height: 0px;
+	opacity: 0;
 }
 
 .button {
@@ -314,14 +458,14 @@ header {
 	box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
-.button:focus {
-	outline: 0;
-}
-
 .profile-button {
 	left: 30px;
 	width: 150px;
 	transition: 0.5s;
+}
+
+.opacity-zero-button {
+	opacity: 0;
 }
 
 .change-photo-button {
@@ -410,6 +554,10 @@ header {
 	width: 100%;
 }
 
+.posts-loggedOut {
+	margin-top: -9px;
+}
+
 .post {
 	width: 100%;
 	margin-bottom: 25px;
@@ -431,6 +579,34 @@ header {
 	box-shadow: 0 0 10px rgba(0,0,0,1);
 }
 
+.post-description-area {
+	position: absolute;
+	bottom: 8px;
+	left: 4px;
+	height: 200px;
+	width: 576px;
+	background: #E7E5E7;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.post-description {
+	position: absolute;
+	bottom: 8px;
+	left: 3px;
+	height: 145px;
+	width: 565px;
+	padding-top: 10px;
+	padding-left: 5px;
+	background: #CACBDC;
+	border: none;
+	border-radius: 3px;
+	font-size: 20pt;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+	overflow-wrap: break-word;
+}
+
 .like-button {
 	position: absolute;
 	right: 0px;
@@ -441,14 +617,13 @@ header {
 	background: #FA6E79;
 }
 
-.like-button:active {
+.liked {
 	border-color: #EC3B83;
 	background: #EC3B83;
-	box-shadow: none;
 }
 
-.like-button:focus {
-	outline: 0;
+.like-button:active {
+	box-shadow: none;
 }
 
 .edit-button {
@@ -467,10 +642,6 @@ header {
 	box-shadow: none;
 }
 
-.edit-button:focus {
-	outline: 0;
-}
-
 .remove-button {
 	position: absolute;
 	right: 90px;
@@ -484,10 +655,6 @@ header {
 .remove-button:active {
 	border-color: #AA00BB;
 	background: #AA00BB;
-}
-
-.remove-button:focus {
-	outline: 0;
 }
 
 .tooltip {
@@ -527,10 +694,20 @@ header {
 }
 
 .underphoto-text {
+	position: relative;
+	width: 400px;
 	list-style: none;
 	padding-left: 5%;
 	padding-top: 5px;
 	min-height: 50px;
+}
+
+.description {
+	display: none;
+}
+
+.post-hashtags {
+	overflow: hidden;
 }
 
 .load-more-button-container {
@@ -540,7 +717,7 @@ header {
 	margin: auto;
 	background: white;
 	border-radius: 3px;
-	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .load-more-button {
@@ -598,6 +775,18 @@ footer {
 	transition: 0.2s;
 }
 
+.nondisplay {
+	display: none;
+}
+
+.hover:hover {
+	background: white;
+}
+
+.zero-outline:focus {
+	outline: 0;
+}
+
 ::-webkit-scrollbar {
 	width: 6px;
 	background: lightgray;
@@ -622,10 +811,6 @@ footer {
 		opacity: 0;
 		visibility: hidden;
 	}
-
-	/*.description-area, .textarea, .hashtags, .add-post-button, .cancel-button {
-
-	}*/
 }
 
 
