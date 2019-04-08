@@ -1,10 +1,20 @@
 class DropArea {
   constructor() {
     this._dropArea = document.getElementById('drop-area');
-    this._dropArea.addEventListener('drop', e => this._handleDrop(e), false);
+    this._dropArea.addEventListener('drop', event => this._handleDrop(event), false);
 
     this._profileArea = document.getElementById('profile-area');
+
     this._descriptionArea = document.getElementById('description-area');
+    this._description = document.getElementById('description');
+    this._hashtags = document.getElementById('hashtags');
+    [
+      this._cancelButton,
+      this._addButton,
+    ] = this._descriptionArea.getElementsByTagName('button');
+    this._addButton.addEventListener('click', event => this.onAddPostButtonClick(event));
+    this._cancelButton.addEventListener('click', event => this.onCancelButtonClick(event));
+
     this._messageBox = messageBox;
     this._isDropAvailable = true;
 
@@ -24,12 +34,16 @@ class DropArea {
   }
 
   _setStylesOnEvents() {
-    ['dragenter', 'dragover'].forEach((eventType) => {
-      this._dropArea.addEventListener(eventType, () => this._dropArea.style.background = '#3B3B6D', false);
+    ['dragenter'].forEach((eventType) => {
+      this._dropArea.addEventListener(eventType, () => {
+        this._dropArea.classList.toggle('highlight-droparea');
+      }, false);
     });
 
     ['dragleave', 'drop'].forEach((eventType) => {
-      this._dropArea.addEventListener(eventType, () => this._dropArea.style.background = '', false);
+      this._dropArea.addEventListener(eventType, () => {
+        this._dropArea.classList.toggle('highlight-droparea');
+      }, false);
     });
   }
 
@@ -46,53 +60,41 @@ class DropArea {
   }
 
   _startPostCreation(file, buttonValue) {
-    this._hideProfileArea();
+    this._changeProfileArea();
     this._changeDropArea(file);
     this._showDescriptionArea();
     this._showDropAreaButtons(buttonValue);
   }
 
-  _hideProfileArea() {
-    const image = this._profileArea.firstElementChild;
-    const buttons = [...this._profileArea.getElementsByTagName('button')];
+  _changeProfileArea() {
+    this._profileArea.firstElementChild.classList.toggle('hide-area');
+    this._profileArea.classList.toggle('hide-area');
 
-    buttons[0].style.opacity = '0';
-    buttons[1].style.opacity = '0';
-
-    image.style.height = '0px';
-    image.style.opacity = '0';
-
-    this._profileArea.style.height = '0px';
-    this._profileArea.style.opacity = '0';
+    [...this._profileArea.getElementsByTagName('button')].forEach((button) => {
+      button.classList.toggle('opacity-zero-button');
+    });
   }
 
   _changeDropArea(file) {
     const image = new Image();
     image.src = `images/${file.name}`;
-    image.id = 'add-post-image';
-    image.height = this._dropArea.offsetHeight;
-    image.width = this._dropArea.offsetWidth;
-    image.style.boxShadow = '0 0 10px rgba(0,0,0,0.6)';
-    image.style.transition = '2s';
-    image.style.visibility = 'visible';
+    image.classList.toggle('add-post-image');
 
-    this._dropArea.style.top = '0px';
     this._dropArea.firstElementChild.style.display = 'none';
-    this._dropArea.style.transition = '0.7s, visibility 0s';
-    this._dropArea.style.visibility = 'hidden';
+    this._dropArea.classList.toggle('upper-drop-area');
+
     this._dropArea.appendChild(image);
   }
 
   _showDescriptionArea() {
-    this._descriptionArea.style.top = '220px';
-    this._descriptionArea.style.opacity = '1';
+    this._descriptionArea.classList.toggle('hide-area');
   }
 
   _showDropAreaButtons(buttonValue) {
     const buttons = [...this._descriptionArea.getElementsByTagName('button')];
-
-    buttons[0].style.visibility = 'visible';
-    buttons[1].style.visibility = 'visible';
+    buttons.forEach((button) => {
+      button.classList.toggle('hidden');
+    });
 
     if (buttonValue) {
       buttons[1].value = buttonValue;
@@ -105,44 +107,29 @@ class DropArea {
     this._hideDropAreaButtons();
     this._hideDescriptionArea();
     this._returnDropArea();
-    this._returnProfileArea();
+    this._changeProfileArea();
   }
 
   _hideDropAreaButtons() {
-    const buttons = [...this._descriptionArea.getElementsByTagName('button')];
-
-    buttons[0].style.visibility = 'hidden';
-    buttons[1].style.visibility = 'hidden';
+    [...this._descriptionArea.getElementsByTagName('button')].forEach((button) => {
+      button.classList.toggle('hidden');
+    });
   }
 
   _hideDescriptionArea() {
-    this._descriptionArea.style.opacity = '0';
+    this._descriptionArea.classList.toggle('hide-area');
+    this._hashtags.value = '';
+    this._description.value = '';
   }
 
   _returnDropArea() {
     this._dropArea.removeChild(this._dropArea.getElementsByTagName('img')[0]);
-    this._dropArea.style.top = '326px';
     this._dropArea.firstElementChild.style.display = 'block';
-    this._dropArea.style.transition = '1s, visibility 0s';
-    this._dropArea.style.visibility = 'visible';
-  }
 
-  _returnProfileArea() {
-    const image = this._profileArea.firstElementChild;
-    const buttons = [...this._profileArea.getElementsByTagName('button')];
-
-    buttons[0].style.opacity = '1';
-    buttons[1].style.opacity = '1';
-
-    image.style.height = '250px';
-    image.style.opacity = '1';
-
-    this._profileArea.style.height = '316px';
-    this._profileArea.style.opacity = '1';
+    this._dropArea.classList.toggle('upper-drop-area');
   }
 
   onCancelButtonClick(event) {
-    console.log(event);
     this._cancelPostCreation();
     this._messageBox.hideErrorMessage();
 
@@ -188,13 +175,18 @@ class DropArea {
   }
 
   editPost(event) {
-    let fileName = event.target.offsetParent
-      .previousElementSibling
-      .previousElementSibling
-      .src;
-    fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
+    if (this._isDropAvailable) {
+      this._isDropAvailable = false;
 
-    this._startPostCreation({ name: fileName }, event.target.offsetParent.id);
+      let fileName = event.target
+        .parentElement
+        .parentElement
+        .querySelector('img')
+        .src;
+      fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
+
+      this._startPostCreation({ name: fileName }, event.target.offsetParent.id);
+    }
   }
 }
 
