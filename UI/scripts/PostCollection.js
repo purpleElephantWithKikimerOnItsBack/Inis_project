@@ -19,8 +19,8 @@ class PostCollection {
         const current = filter.createdAt;
         current.setHours(0, 0, 0, 0);
 
-        const next = new Date();
-        next.setDate(current.getDate() + 1);
+        const next = new Date(current.toDateString());
+        next.setDate(next.getDate() + 1);
         next.setHours(0, 0, 0, 0);
 
         if (current > post.createdAt || post.createdAt > next) {
@@ -117,6 +117,10 @@ class PostCollection {
     return `${this._posts.length + 1}`;
   }
 
+  filter(prop, value) {
+    return this._posts.filter(post => post[prop] === value);
+  }
+
   static validate(post) {
     const {
       id,
@@ -128,12 +132,10 @@ class PostCollection {
       likes,
     } = post;
 
-    if (!id || !description || description.length > 199 || !createdAt
-      || !author || !photoLink || !hashTags || !likes) {
-      return false;
-    }
+    const result = id && description && description.length < 200 && createdAt
+      && author && photoLink && hashTags && likes;
 
-    return true;
+    return result;
   }
 }
 

@@ -11,6 +11,9 @@ class NewsArea {
     this._author = document.getElementById('author').textContent;
 
     this._messageBox = messageBox;
+
+    this._loadMoreButton = document.getElementById('load-more-button');
+    this._loadMoreButton.addEventListener('click', event => this._loadMore(event));
   }
 
   _buildPostHTML(post) {
@@ -20,6 +23,9 @@ class NewsArea {
     const image = this._postTemplate.content.querySelector('img');
     image.src = post.photoLink;
 
+    this._postTemplate.content.querySelector('.post-description')
+      .textContent = `description: ${post.description}`;
+
     this._likeButton.id = `${post.id}.like-button`;
     this._likeButton.value = '0';
 
@@ -28,10 +34,21 @@ class NewsArea {
     listItems[1].textContent = `#${post.hashTags.join('#')}`;
 
     const node = document.importNode(this._postTemplate.content, true);
-    if (post.author === this._author) {
-      this._buttons.forEach(button => button.id = `${post.id + '.' + button.classList[0]}`);
-      node.querySelector('.photo-container')
+    const nodePhotoContainer = node.querySelector('.photo-container');
+    if (loggedIn && post.author === this._author) {
+      this._buttons.forEach((button) => {
+        button.id = `${post.id}.${button.classList[0]}`;
+      });
+
+      nodePhotoContainer
         .appendChild(document.importNode(this._buttonsTemplate.content, true));
+    }
+
+    node.querySelector('img').addEventListener('click', event => showPostDescription(event));
+
+    if (!loggedIn) {
+      node.querySelector('.photo-container')
+        .removeChild(node.getElementById(`${this._likeButton.id}`));
     }
 
     return node;
@@ -39,37 +56,44 @@ class NewsArea {
 
   displayPage(start, count, filter) {
     const posts = this._postCollection.getPage(start, count, filter);
-    const container = document.createElement('div');
 
-    posts.forEach((post) => {
-      container.appendChild(this._buildPostHTML(post));
+    if (posts.length) {
+      const container = document.createElement('div');
+      container.classList.toggle('posts-component');
+
+      posts.forEach((post) => {
+        container.appendChild(this._buildPostHTML(post));
+      });
+
+      this._postList.append(container);
+
+      if(!this._postCollection.getPage(posts[posts.length - 1].id, count, filter).length) {
+        this._loadMoreButton.classList.toggle('nondisplay');
+      } else if (this._loadMoreButton.classList.contains('nondisplay')) {
+        this._loadMoreButton.classList.toggle('nondisplay');
+      }
+    }
+  }
+
+  reloadPage(start, count, filter) {
+    [...this._postList.getElementsByClassName('posts-component')].forEach((component) => {
+      this._postList.removeChild(component);
     });
 
-    this._postList.append(container);
+    this.displayPage(start, count, filter);
   }
 
   displayPost(post) {
-    this._postList.append(this._buildPostHTML(post));
+    const container = document.createElement('div');
+    container.classList.toggle('posts-component');
+
+    container.appendChild(this._buildPostHTML(post));
+    this._postList.append(container);
   }
 
-  loadMore() {
-    this.displayPage(this._postTemplate.content.querySelector('li').id);
-  }
-
-  likePost(event) {
-    const button = document.getElementById(`${event.target.id}`);
-
-    if (button.value === '0') {
-      button.value = '1';
-      button.classList.remove('opacity');
-      button.style.background = '#EC3B83';
-      button.style.borderColor = '#EC3B83';
-    } else {
-      button.value = '0';
-      button.classList.add('opacity');
-      button.style.background = '#FA6E79';
-      button.style.borderColor = '#FA6E79';
-    }
+  _loadMore(event) {
+    this.displayPage(this._postList.lastElementChild.lastElementChild.id,
+      10, filterArea.filter);
   }
 
   checkRemoval(event) {
@@ -83,5 +107,16 @@ class NewsArea {
   }
 }
 
+function likePost(event) {
+  const button = document.getElementById(`${event.target.id}`);
+  button.classList.toggle('liked');
+  button.classList.toggle('opacity');
+}
+
+function showPostDescription(event) {
+  event.target.parentElement.querySelector('.post-description-area')
+    .classList.toggle('hidden');
+}
+
 const newsArea = new NewsArea(postCollection);
-newsArea.displayPage(15, 4);
+newsArea.displayPage(1);
