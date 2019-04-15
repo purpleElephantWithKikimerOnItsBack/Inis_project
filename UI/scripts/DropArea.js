@@ -169,7 +169,8 @@ class DropArea {
         event.target.value = '';
       }
     } else {
-      this._messageBox.showErrorMessage('Something went wrong with post creation. Please, check the description'
+      this._messageBox.showErrorMessage('Something went wrong with post creation.'
+        + ' Please, check the description'
         + ' and hashtags fields.', false, null);
     }
   }
