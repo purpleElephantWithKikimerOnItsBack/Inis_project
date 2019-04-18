@@ -5,20 +5,69 @@
          version="4.0">
 
     <servlet>
-        <servlet-name>helloworldservlet</servlet-name>
-        <servlet-class>MainServlet</servlet-class>
+        <servlet-name>StatusServlet</servlet-name>
+        <servlet-class>servlets.StatusServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>helloworldservlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <servlet-name>StatusServlet</servlet-name>
+        <url-pattern>/status</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StaticPageServlet</servlet-name>
+        <servlet-class>servlets.StaticPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StaticPageServlet</servlet-name>
+        <url-pattern>/page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetParametersServlet</servlet-name>
+        <servlet-class>servlets.GetParametersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetParametersServlet</servlet-name>
+        <url-pattern>/get</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CheckServlet</servlet-name>
+        <servlet-class>servlets.CheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckServlet</servlet-name>
+        <url-pattern>/check</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Test1Servlet</servlet-name>
+        <servlet-class>servlets.Test1Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Test1Servlet</servlet-name>
+        <url-pattern>/test1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Test2Servlet</servlet-name>
+        <servlet-class>servlets.Test2Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Test2Servlet</servlet-name>
+        <url-pattern>/test2</url-pattern>
     </servlet-mapping>
 
     <filter>
-        <filter-name>infofilter</filter-name>
-        <filter-class>InfoFilter</filter-class>
+        <filter-name>InformationFilter</filter-name>
+        <filter-class>filters.InformationFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>infofilter</filter-name>
-        <url-pattern>/</url-pattern>
+        <filter-name>InformationFilter</filter-name>
+        <servlet-name>StatusServlet</servlet-name>
+        <servlet-name>StaticPageServlet</servlet-name>
+        <servlet-name>GetParametersServlet</servlet-name>
+        <servlet-name>Test1Servlet</servlet-name>
+        <servlet-name>Test2Servlet</servlet-name>
     </filter-mapping>
 </web-app>
