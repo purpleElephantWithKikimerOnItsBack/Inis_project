@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Inis_Project</title>
+		<link rel="stylesheet" type="text/css" href="styles.css"/>
+	</head>
+	<body>
+		<a name="top"><div></div></a>
+		<header>
+			<div class="logo">
+				<img class="logo-cross nonselect" src="images/site_images/leviathan-cross.jpg"/>
+				<div class="title nonselect">Inis_Project</div>
+			</div>
+		</header>
+		<a href="#top"><button class="go-up-button transition"><div class="go-up-button-title">Go Up</div></button></a>
+		<div id="general-info-area" class="profile-area nondisplay">
+			<div id="author" class="nickname">kikimer</div>
+			<div class="general-info">
+				<span class="info-title">General</span>
+				<ul class="info-list">
+					<li>Name: Sinitsyn Igor</li>
+					<li>Birthday: 18.06.2000</li>
+					<li>City: Minsk, Belarus</li>
+				</ul>
+			</div>
+			<div class="profile-info">
+				<span class="info-title">Profile</span>
+				<ul id="general-info" class="info-list">
+					<li>Followers: many</li>
+					<li>Photos: 10</li>
+					<li>Likes: 1</li>
+				</ul>
+			</div>
+		</div>
+		<div class="profile-photo-container">
+			<div class="area-stick-to">
+				<div id="profile-area" class="profile-photo-area">
+					<img class="profile-photo nonselect nondisplay" src="images/profile.jpg"/>
+					<button class="profile-button change-photo-button button button-transition zero-outline nondisplay">Change photo</button>
+					<button class="profile-button log-out-button button button-transition zero-outline nondisplay">Log out</button>
+					<form name="log-in" class="">
+						<input type="text" class="input-field" placeholder="nickname">
+						<input type="password" class="input-field" placeholder="password">
+						<button class="profile-button button zero-outline input-button">Log In</button>
+					</form>
+					<form name="sign-up" class="">
+						<hr>
+						<input type="text" class="input-field" placeholder="name">
+						<input type="text" class="input-field" placeholder="city">
+						<input type="date" class="input-field">
+						<input type="text" class="input-field" placeholder="nickname">
+						<input type="password" class="input-field" placeholder="password">
+						<button class="profile-button button zero-outline input-button">Sign Up</button>
+					</form>
+				</div>
+				<div id="drop-area" class="dragndrop-area transition hover nondisplay">
+					<div class="dragndrop-area-title nonselect">
+						Drag And Drop
+					</div>
+				</div>
+				<div id="description-area" class="description-area hide-area">
+					<textarea id="description" class="textarea" placeholder="description" maxlength="199"></textarea>
+					<input id="hashtags" class="hashtags" type="text" placeholder="hashtags"/>
+					<button id="cancel-button" class="add-post-button button button-transition zero-outline hidden">Cancel</button>
+					<button id="add-post-button" class="cancel-button button button-transition zero-outline hidden">Add</button>
+				</div>
+				<div id="filter-area" class="filter-area hover transition">
+					<div class="filter-area-title nonselect transition">
+						Filters
+					</div>
+					<ul id="filters" class="filters">
+						<template id="filter-item-template">
+							<li class="filter-item">
+								<div class="filter-item-content"></div>
+								<button class="remove-filter-button button zero-outline">-</button>
+							</li>
+						</template>
+					</ul>
+					<div id="options" class="hidden">
+						<select id="filter-options" class="filter-options transition">
+							<option>author</option>
+							<option>createdAt</option>
+							<option>hashTags</option>
+						</select>
+						<input type="date" class="date-chooser hidden"/>
+						<input type="text" class="filter-inputer" placeholder="enter name"/>
+						<button class="filter-ok-button button transition zero-outline">Ok</button>
+					</div>
+					<button class="add-filter-button transition zero-outline">+</button>
+				</div>
+				<div id="error-box" class="error-box">
+					<div></div>
+					<button class="error-box-ok button button-transition zero-outline" onclick="newsArea.removePost(event)">Ok</button>
+					<button class="error-box-cancel button button-transition zero-outline" onclick="messageBox.hideErrorMessage()">Cancel</button>
+				</div>
+			</div>
+		</div>
+		<div class="news-area">
+			<ul class="posts posts-loggedOut">
+				<template id="posttemplate">
+					<li class="post">
+						<div class="photo-container">
+							<img class="photo" src=""/>
+							<button class="like-button button button-transition opacity zero-outline" onclick="likePost(event)"></button>
+							<div class="post-description-area hidden transition">
+								<div class="post-description"></div>
+							</div>
+						</div>
+						<ul class="underphoto-text">
+							<li></li>
+							<li class="post-hashtags"></li>
+						</ul>
+					</li>
+				</template>
+				<template id="edit-remove-buttons">
+					<button class="edit-button button button-transition opacity zero-outline" onclick="dropArea.editPost(event)">
+						<div class="tooltip">
+							<span class="tooltiptext">Edit post</span>
+						</div>
+					</button>
+					<button class="remove-button button button-transition opacity zero-outline" onclick="newsArea.checkRemoval(event)">
+						<div class="tooltip">
+							<span class="tooltiptext">Remove post</span>
+						</div>
+					</button>
+				</template>
+			</ul>
+			<div id="load-more-button" class="load-more-button-container">
+				<button class="load-more-button button button-transition zero-outline">Load more</button>
+			</div>
+		</div>
+		<footer>
+			<div class="footer-list-area">
+				<ul>
+					<li>Project name: Inis_Project</li>
+					<li>Author: Igor Sinitsyn</li>
+					<li>2 year 6 group</li>
+					<li>E-mail: mr.kikimer95@mail.ru</li>
+					<li>Last updated: 13.03.2019</li>
+				</ul>
+			</div>
+		</footer>
+		<script src="scripts/Account.js"></script>
+		<script src="scripts/MessageBox.js"></script>
+		<script src="scripts/PhotoPosts.js"></script>
+		<script src="scripts/PostCollection.js"></script>
+		<script src="scripts/NewsArea.js"></script>
+		<script src="scripts/DropArea.js"></script>
+		<script src="scripts/FilterArea.js"></script>
+		<script src="scripts/GeneralInfo.js"></script>
+		<script src="scripts/LogProcess.js"></script>
+	</body>
+</html>
