@@ -77,35 +77,37 @@ header {
 .error-box {
 	position: absolute;
 	bottom: 0px;
-	right: -250px;
+	right: -220px;
 	height: 100px;
 	width: 200px;
 	border: none;
 	border-radius: 3px;
 	background: white;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	opacity: 0;
-	transition: 1s;
+	transition: 0.7s;
+}
+
+.error-box-content {
+	padding: 5px;
+	text-align: center;
 }
 
 .error-box-ok {
 	position: absolute;
 	bottom: 0px;
-	right: 0px;
+	left: 0px;
 	height: 20px;
 	width: 98px;
-	transition: 1s;
-	visibility: hidden;
+	transition: 0.7s;
 }
 
 .error-box-cancel {
 	position: absolute;
 	bottom: 0px;
-	left: 0px;
+	right: 0px;
 	height: 20px;
 	width: 98px;
-	transition: 1s;
-	visibility: hidden;
+	transition: 0.7s;
 }
 
 .profile-area {
@@ -196,6 +198,7 @@ header {
 .filter-item-content {
 	width: 140px;
 	height: 20px;
+	text-align: center;
 	overflow: hidden;
 }
 
@@ -221,6 +224,19 @@ header {
 	border: none;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	opacity: 1;
+	text-align-last: center;
+}
+
+.filter-options:focus {
+	outline: 0;
+}
+
+#options > input {
+	text-align: center;
+}
+
+#options > input::placeholder {
+	text-align: center;
 }
 
 .filter-cancel-button {
@@ -334,11 +350,6 @@ header {
 .dragndrop-area:hover .dragndrop-area-title {
 	color: darkgray;
 }
-/*
-#add-post-image {
-	width: 212px;
-	height: 209px;
-}*/
 
 .description-area {
 	position: absolute;
@@ -552,10 +563,6 @@ header {
 	margin-top: 10px;
 	padding: 0px;
 	width: 100%;
-}
-
-.posts-loggedOut {
-	margin-top: -9px;
 }
 
 .post {
@@ -798,11 +805,11 @@ footer {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: lightgray; 
+  background: lightgray;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: gray; 
+  background: gray;
 }
 
 @media screen and (max-width: 1045px) {
