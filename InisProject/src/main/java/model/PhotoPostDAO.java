@@ -1,11 +1,12 @@
-package resources;
+package model;
 
 import java.util.List;
 
 public interface PhotoPostDAO {
-    PostCollection.Post get(Long id);
-
-    List<PostCollection.Post> getAll();
-
-    List<PostCollection.Post> getByFilter(int page, int limit, String filter);
+    List<String> getPage(int start, int count, String filter);
+    String get(int id);
+    boolean add(String jsonPost);
+    boolean remove(int id);
+    boolean validate(String jsonPost);
+    boolean edit(int id, String jsonEdit);
 }

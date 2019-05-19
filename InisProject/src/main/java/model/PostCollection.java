@@ -1,6 +1,5 @@
-package resources;
+package model;
 
-import com.google.gson.Gson;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -8,51 +7,58 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PostCollection {
-    public static List<String> getPage(int start, int count, String filter) {
-        if (start < 0 || start >= PhotoPosts.collection.size()) {
+public class PostCollection implements PhotoPostDAO {
+    public static final PostCollection postCollection = new PostCollection();
+    public static final List<String> photoPosts = PhotoPosts.collection;
+
+    private PostCollection(){};
+    public PostCollection getInstance() {
+        return postCollection;
+    }
+
+    public List<String> getPage(int start, int count, String filter) {
+        if (start < 0 || start >= photoPosts.size()) {
             return new ArrayList<>();
         }
 
-        Gson gson = new Gson();
-        Filter f = gson.fromJson(filter, Filter.class);
+        Filter f = (Filter)GsonParser.fromJson(filter, Filter.class);
 
-        List<String> res = PhotoPosts.collection.stream().filter((post) -> {
-            Post p = gson.fromJson(post, Post.class);
+        List<String> res = photoPosts.stream().filter((post) -> {
+            Post p = (Post)GsonParser.fromJson(post, Post.class);
 
-            if (f.author != null) {
-                if (!f.author.equals(p.author)) {
+            if (f.getAuthor() != null) {
+                if (!f.getAuthor().equals(p.getAuthor())) {
                     return false;
                 }
             }
 
-            if (f.createdAt != null) {
-                DateTime current = new DateTime(f.createdAt);
+            if (f.getCreatedAt() != null) {
+                DateTime current = new DateTime(f.getCreatedAt());
                 current = current.minusMillis(current.getMillisOfDay());
 
                 DateTime next = current.plusDays(1);
 
-                DateTime postDate = new DateTime(p.createdAt);
+                DateTime postDate = new DateTime(p.getCreatedAt());
 
                 if (postDate.compareTo(current) < 0 || postDate.compareTo(next) > 0) {
                     return false;
                 }
             }
 
-            if (f.hashTags != null) {
-                return Arrays.stream(p.hashTags).anyMatch(hashTag ->
-                        Arrays.asList(f.hashTags).contains(hashTag));
+            if (f.getHashTags() != null) {
+                return Arrays.stream(p.getHashTags()).anyMatch(hashTag ->
+                        Arrays.asList(f.getHashTags()).contains(hashTag));
             }
 
             return true;
         }).collect(Collectors.toList());
 
         res.sort((x, y) -> {
-            Post xObject = gson.fromJson(x, Post.class);
-            Post yObject = gson.fromJson(y, Post.class);
+            Post xObject = (Post)GsonParser.fromJson(x, Post.class);
+            Post yObject = (Post)GsonParser.fromJson(y, Post.class);
 
-            DateTime xDate = new DateTime(xObject.createdAt);
-            DateTime yDate = new DateTime(yObject.createdAt);
+            DateTime xDate = new DateTime(xObject.getCreatedAt());
+            DateTime yDate = new DateTime(yObject.getCreatedAt());
 
             return yDate.compareTo(xDate);
         });
@@ -68,22 +74,20 @@ public class PostCollection {
         return res.subList(start, start + count);
     }
 
-    public static boolean add(String jsonPost) {
+    public boolean add(String jsonPost) {
         if (validate(jsonPost)) {
-            PhotoPosts.collection.add(jsonPost);
+            photoPosts.add(jsonPost);
             return true;
         }
         return false;
     }
 
-    public static String get(int id) {
-        Gson gson = new Gson();
-
+    public String get(int id) {
         String result = "";
-        for (String ps: PhotoPosts.collection) {
-            Post post = gson.fromJson(ps, Post.class);
+        for (String ps: photoPosts) {
+            Post post = (Post)GsonParser.fromJson(ps, Post.class);
 
-            if (post.id == id) {
+            if (post.getId() == id) {
                 result = ps;
                 break;
             }
@@ -92,39 +96,37 @@ public class PostCollection {
         return result;
     }
 
-    public static boolean remove(int id) {
+    public boolean remove(int id) {
         String result = get(id);
 
         if (!result.isEmpty()) {
-            PhotoPosts.collection.remove(result);
+            photoPosts.remove(result);
             return true;
         }
 
         return false;
     }
 
-    public static boolean validate(String jsonPost) {
-        Gson gson = new Gson();
-        Post post = gson.fromJson(jsonPost, Post.class);
+    public boolean validate(String jsonPost) {
+        Post post = (Post)GsonParser.fromJson(jsonPost, Post.class);
 
-        return post.author != null && post.createdAt != null && post.description != null &&
-                post.description.length() < 200 && post.hashTags != null && post.id > 0 &&
-                post.photoLink != null && post.likes != null;
+        return post.getAuthor() != null && post.getCreatedAt() != null && post.getDescription() != null &&
+                post.getDescription().length() < 200 && post.getHashTags() != null && post.getId() > 0 &&
+                post.getPhotoLink() != null && post.getLikes() != null;
     }
 
-    public static boolean edit(int id, String jsonEdit) {
-        Gson gson = new Gson();
+    public boolean edit(int id, String jsonEdit) {
+        Post postToEdit = (Post)GsonParser.fromJson(get(id), Post.class);
+        Post changes = (Post)GsonParser.fromJson(jsonEdit, Post.class);
 
-        Post postToEdit = gson.fromJson(get(id), Post.class);
-        Post changes = gson.fromJson(jsonEdit, Post.class);
+        postToEdit.setDescription(changes.getDescription());
+        postToEdit.setHashTags(changes.getHashTags());
+        postToEdit.setCreatedAt(changes.getCreatedAt());
 
-        postToEdit.description = changes.description;
-        postToEdit.hashTags = changes.hashTags;
-
-        String postToEditJson = gson.toJson(postToEdit);
+        String postToEditJson = GsonParser.toJson(postToEdit);
 
         if (validate(postToEditJson)) {
-            remove(postToEdit.id);
+            remove(postToEdit.getId());
             add(postToEditJson);
 
             return true;
@@ -133,36 +135,12 @@ public class PostCollection {
         return false;
     }
 
-    public static int generateId() {
-        return PhotoPosts.collection.size() + 1;
+    public List<String> filter(String filter) {
+        Filter f = (Filter)GsonParser.fromJson(filter, Filter.class);
+        return getPage(0, photoPosts.size(), filter);
     }
 
-    public class Filter {
-        private String author;
-        private String createdAt;
-        private String[] hashTags;
-
-        @Override
-        public String toString() {
-            return String.format("%s\n%s\n%s\n",
-                    author, createdAt, Arrays.toString(hashTags));
-        }
-    }
-
-    public class Post {
-        private int id;
-        private String description;
-        private String createdAt;
-        private String author;
-        private String photoLink;
-        private String[] hashTags;
-        private String[] likes;
-
-        @Override
-        public String toString() {
-            return String.format("%d\n%s\n%s\n%s\n%s\n%s\n%s\n",
-                    id, description, createdAt, author, photoLink,
-                    Arrays.toString(hashTags), Arrays.toString(likes));
-        }
+    public int generateId() {
+        return photoPosts.size() + 1;
     }
 }

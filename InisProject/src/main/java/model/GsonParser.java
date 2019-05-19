@@ -1,4 +1,4 @@
-package resources;
+package model;
 
 import com.google.gson.Gson;
 
@@ -9,7 +9,7 @@ public class GsonParser {
         return GSON.toJson(object);
     }
 
-    public static Object fromJson(String json, Class clazz) {
-        return GSON.fromJson(json, clazz);
+    public static Object fromJson(String json, Class c) {
+        return GSON.fromJson(json, c);
     }
 }
